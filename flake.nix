@@ -10,10 +10,11 @@
 
       perSystem = { pkgs, ... }: {
         packages = {
+          arturo = pkgs.callPackage ./languages/arturo { };
+          berry = pkgs.callPackage ./languages/berry { };
           dyon = pkgs.callPackage ./languages/dyon { };
           oak = pkgs.callPackage ./languages/oak { };
           oakc = pkgs.callPackage ./languages/oakc { };
-          berry = pkgs.callPackage ./languages/berry { };
         };
       };
     };
