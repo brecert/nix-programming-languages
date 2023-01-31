@@ -16,6 +16,7 @@
           dyon = pkgs.callPackage ./languages/dyon { };
           oak = pkgs.callPackage ./languages/oak { };
           oakc = pkgs.callPackage ./languages/oakc { };
+          rock = pkgs.callPackage ./languages/rock { };
         };
       };
     };
