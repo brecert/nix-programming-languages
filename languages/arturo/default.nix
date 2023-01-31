@@ -2,7 +2,18 @@
 , stdenv
 , fetchFromGitHub
 , nim
+, gtk3
+, webkitgtk
+, gmp
+, mpfr
+, useMiniBuild ? true 
 }:
+
+assert !useMiniBuild -> gtk3 != null
+                     && webkitgtk != null
+                     && gmp != null
+                     && mpfr != null;
+  
 
 stdenv.mkDerivation rec {
   pname = "arturo";
@@ -15,8 +26,14 @@ stdenv.mkDerivation rec {
     hash = "sha256-tOjkFI+MXVqt6lsoG786rugTmuqG9eFqDQESF2mOKOg=";
   };
 
-  nativeBuildInputs = [
+  nativeBuildInputs = if useMiniBuild then [
     nim
+  ] else [
+    nim
+    gtk3
+    webkitgtk
+    gmp
+    mpfr
   ]; 
 
   patchPhase = ''

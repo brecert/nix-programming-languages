@@ -11,6 +11,7 @@
       perSystem = { pkgs, ... }: {
         packages = {
           arturo = pkgs.callPackage ./languages/arturo { };
+          arturoFull = pkgs.callPackage ./languages/arturo { useMiniBuild = false; };
           berry = pkgs.callPackage ./languages/berry { };
           dyon = pkgs.callPackage ./languages/dyon { };
           oak = pkgs.callPackage ./languages/oak { };
