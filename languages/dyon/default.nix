@@ -5,13 +5,13 @@
 
 rustPlatform.buildRustPackage rec {
   pname = "dyon";
-  version = "0.47.3";
+  version = "0.48.1";
 
   src = fetchCrate {
     inherit pname version;
-    sha256 = "sha256-hShe8Mj8lEuyXwaOz5lraSA+AEQUx6BknIR/WezTxOQ=";
+    sha256 = "sha256-UYY0AHIljzTSVDZVuS/6WxMxeGbZdG3P6g0sYzkyLJE=";
   };
-  cargoHash = "sha256-8tG4dnmb5kzX6JTWDPkbltxlxzCFxXP8G6K6PGDCVxQ=";
+  cargoHash = "sha256-/3oBih13JChVfksoZeXxKHDyFwljqBhxMDh1oz/c+XE=";
 
   dontCargoCheck = true;
 
