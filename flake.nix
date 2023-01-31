@@ -11,6 +11,7 @@
       perSystem = { pkgs, ... }: {
         packages = {
           dyon = pkgs.callPackage ./languages/dyon { };
+          oak = pkgs.callPackage ./languages/oak { };
         };
       };
     };

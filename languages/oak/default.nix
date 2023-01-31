@@ -1,0 +1,26 @@
+{ lib
+, buildGoModule
+, fetchFromGitHub
+}:
+
+buildGoModule rec {
+  pname = "oak";
+  version = "0.3";
+
+  src = fetchFromGitHub {
+    owner = "thesephist";
+    repo = "oak";
+    rev = "v${version}";
+    hash = "sha256-DK5n8xK57CQiukyBt9+CFK1j8+nphP//T2jTXq64VH8=";
+  };
+
+  vendorSha256 = "sha256-iQtb3zNa57nB6x4InVPw7FCmW7XPw5yuz0OcfASXPD8=";
+
+  ldflags = [ "-s" "-w" ];
+
+  meta = with lib; {
+    description = "An expressive, simple, dynamic programming language";
+    homepage = "https://github.com/thesephist/oak";
+    license = licenses.mit;
+  };
+}
