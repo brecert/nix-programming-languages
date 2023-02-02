@@ -18,6 +18,7 @@
           oak = pkgs.callPackage ./languages/oak { };
           oakc = pkgs.callPackage ./languages/oakc { };
           rock = pkgs.callPackage ./languages/rock { };
+          wu = pkgs.callPackage ./languages/wu { };
         };
       };
     };
