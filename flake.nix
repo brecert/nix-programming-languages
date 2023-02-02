@@ -14,6 +14,7 @@
           arturoFull = pkgs.callPackage ./languages/arturo { useMiniBuild = false; };
           berry = pkgs.callPackage ./languages/berry { };
           dyon = pkgs.callPackage ./languages/dyon { };
+          goplus = pkgs.callPackage ./languages/goplus { };
           oak = pkgs.callPackage ./languages/oak { };
           oakc = pkgs.callPackage ./languages/oakc { };
           rock = pkgs.callPackage ./languages/rock { };
