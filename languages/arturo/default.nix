@@ -17,13 +17,13 @@ assert !useMiniBuild -> gtk3 != null
 
 stdenv.mkDerivation rec {
   pname = "arturo";
-  version = "0.9.80";
+  version = "0.9.83";
 
   src = fetchFromGitHub {
     owner = "arturo-lang";
     repo = "arturo";
     rev = "v${version}";
-    hash = "sha256-tOjkFI+MXVqt6lsoG786rugTmuqG9eFqDQESF2mOKOg=";
+    hash = "sha256-a4bvXL7mCVJZmtvPhPzsl34iCt/44+kIaF54Yd6Lup4=";
   };
 
   nativeBuildInputs = if useMiniBuild then [

@@ -7,8 +7,15 @@
   outputs = { flake-parts, ... }@inputs: 
     flake-parts.lib.mkFlake { inherit inputs; } {
       systems = ["x86_64-linux"];
+      transposition.lib.adHoc = true;
 
-      perSystem = { pkgs, ... }: {
+      perSystem = { self', pkgs, ... }: {
+        lib = pkgs.callPackage ./.nix/lib {};
+
+        apps = pkgs.lib.mapAttrs
+          (name: drv: { program = drv; })
+          (self'.lib.importRunners (self'.lib.findRunnerFiles ./languages));
+
         packages = {
           arturo = pkgs.callPackage ./languages/arturo { };
           arturoFull = pkgs.callPackage ./languages/arturo { useMiniBuild = false; };
