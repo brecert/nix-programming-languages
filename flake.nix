@@ -9,24 +9,29 @@
       systems = ["x86_64-linux"];
       transposition.lib.adHoc = true;
 
-      perSystem = { self', pkgs, ... }: {
-        lib = pkgs.callPackage ./.nix/lib {};
+      perSystem = { self', pkgs, ... }:
+        let
+          # todo: make a scope for this?
+          callPackage = pkgs.lib.callPackageWith (pkgs // self'.packages);
+        in
+        {
+          lib = callPackage ./.nix/lib {};
 
-        apps = pkgs.lib.mapAttrs
-          (name: drv: { program = drv; })
-          (self'.lib.importRunners (self'.lib.findRunnerFiles ./languages));
+          apps = pkgs.lib.mapAttrs
+            (name: drv: { program = drv; })
+            (self'.lib.importRunners (self'.lib.findRunnerFiles ./languages) callPackage);
 
-        packages = {
-          arturo = pkgs.callPackage ./languages/arturo { };
-          arturoFull = pkgs.callPackage ./languages/arturo { useMiniBuild = false; };
-          berry = pkgs.callPackage ./languages/berry { };
-          dyon = pkgs.callPackage ./languages/dyon { };
-          goplus = pkgs.callPackage ./languages/goplus { };
-          oak = pkgs.callPackage ./languages/oak { };
-          oakc = pkgs.callPackage ./languages/oakc { };
-          rock = pkgs.callPackage ./languages/rock { };
-          wu = pkgs.callPackage ./languages/wu { };
+          packages = {
+            arturo = callPackage ./languages/arturo { };
+            arturoFull = callPackage ./languages/arturo { useMiniBuild = false; };
+            berry = callPackage ./languages/berry { };
+            dyon = callPackage ./languages/dyon { };
+            goplus = callPackage ./languages/goplus { };
+            oak = callPackage ./languages/oak { };
+            oakc = callPackage ./languages/oakc { };
+            rock = callPackage ./languages/rock { };
+            wu = callPackage ./languages/wu { };
+          };
         };
-      };
     };
 }

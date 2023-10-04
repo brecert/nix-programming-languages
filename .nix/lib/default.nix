@@ -1,7 +1,6 @@
 { lib
 , nushell
 , writeTextFile
-, callPackage
 }:
 
 let 
@@ -70,7 +69,7 @@ let
           (builtins.readDir inDir)
       ));
 
-    importRunners = withRunners:
+    importRunners = withRunners: callPackage:
       lib.mapAttrs'
         (name: path: lib.nameValuePair "${name}-runner" (callPackage path { inherit (self) mkRunner; }))
         withRunners;
