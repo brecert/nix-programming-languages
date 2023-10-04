@@ -5,7 +5,7 @@
 , python3
 }:
 
-stdenv.mkDerivation rec {
+stdenv.mkDerivation {
   pname = "berry";
   version = "1.1.0";
 
