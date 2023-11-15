@@ -27,6 +27,7 @@
             berry = callPackage ./languages/berry { };
             dyon = callPackage ./languages/dyon { };
             goplus = callPackage ./languages/goplus { };
+            inko = callPackage ./languages/inko { };
             oak = callPackage ./languages/oak { };
             oakc = callPackage ./languages/oakc { };
             rock = callPackage ./languages/rock { };
