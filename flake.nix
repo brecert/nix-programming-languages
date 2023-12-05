@@ -30,6 +30,7 @@
             inko = callPackage ./languages/inko { };
             oak = callPackage ./languages/oak { };
             oakc = callPackage ./languages/oakc { };
+            onyx = callPackage ./languages/onyx { };
             rock = callPackage ./languages/rock { };
             wu = callPackage ./languages/wu { };
           };
