@@ -4,7 +4,11 @@
 , fetchFromGitHub
 , makeWrapper
 , wasmer
+, tezos-rust-libs # we just need the wasmer c api but this has a cache available
+, onyxRuntimeLibrary ? "none"
 }:
+
+assert onyxRuntimeLibrary == "none" || onyxRuntimeLibrary == "wasmer";
 
 let 
   inherit (lib.lists) reverseList;
@@ -25,17 +29,25 @@ in
     ONYX_ARCH = concatStringsSep "_" (reverseList (splitString "-" system));
     ONYX_USE_DYNCALL = 1;
 
-    nativeBuildInputs = [
-      wasmer
-      makeWrapper
-    ];
+    nativeBuildInputs = [ makeWrapper ]
+      ++ lib.optionals (onyxRuntimeLibrary == "wasmer") [ wasmer ] ;
 
-    buildInputs = [
-      wasmer
-    ];
+    buildInputs = []
+      ++ lib.optionals (onyxRuntimeLibrary == "wasmer") [ wasmer ];
 
-    buildPhase = ''      
+    buildPhase = ''
+      runHook preBuild
+      
+      ${lib.optionalString (onyxRuntimeLibrary == "wasmer") ''
+        export ONYX_RUNTIME_LIBRARY="wasmer"
+        export HOME="$PWD/.home"
+        mkdir -p $HOME/.wasmer/lib
+        cp "${tezos-rust-libs}/lib/tezos-rust-libs/libwasmer.a" "$HOME/.wasmer/lib/libwasmer.a"
+      ''}
+      
       ./build.sh compile
+
+      runHook postBuild      
     '';
 
     installPhase = ''

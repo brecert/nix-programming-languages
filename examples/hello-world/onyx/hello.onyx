@@ -1,0 +1,5 @@
+use core
+
+main :: () {
+    core.println("Hello, World!");
+}

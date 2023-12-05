@@ -31,6 +31,7 @@
             oak = callPackage ./languages/oak { };
             oakc = callPackage ./languages/oakc { };
             onyx = callPackage ./languages/onyx { };
+            onyx-wasmer = callPackage ./languages/onyx { onyxRuntimeLibrary = "wasmer"; };
             rock = callPackage ./languages/rock { };
             wu = callPackage ./languages/wu { };
           };
